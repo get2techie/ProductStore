@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="productStoreAdmin">
+<head>
+    <title>Administration</title>
+
+    <link href="bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap-theme.css" rel="stylesheet" />
+
+    <script src="angular.js"></script>
+    <script src="ngmodules/angular-route.js"></script>
+    <script src="ngmodules/angular-resource.js"></script>
+    <script>
+        angular.module("productStoreAdmin", ["ngRoute","ngResource"])
+            .config(function ($routeProvider) {
+ 
+                $routeProvider.when("/login", {
+                    templateUrl: "views/adminLogin.html"
+                });
+ 
+                $routeProvider.when("/main", {
+                    templateUrl: "views/adminMain.html"
+                });
+ 
+                $routeProvider.otherwise({
+                    redirectTo: "/login"
+                });
+            });
+    </script>
+    <script type="text/javascript" src="controllers/adminControllers.js"></script>
+    <script type="text/javascript" src="controllers/adminProductController.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse">
+        <div class="container">
+            <a class="navbar-brand" href="#">PRODUCT STORE</a>
+            <cart-summary />
+        </div>
+    </div>
+    <div class="container">
+        <ng-view />    
+    </div>
+</body>
+</html>
