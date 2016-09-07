@@ -1,8 +1,13 @@
-<div class="panel panel-default row" ng-controller="productListCtrl">
-    <div class="col-xs-3" ng-hide="data.error">
+<style type="text/css">
+     .nav li a:focus{
+    background-color: #265a88;
+</style>
+
+<div class="panel-default row" ng-controller="productListCtrl">
+    <div class="col-xs-2 col-md-2" ng-hide="data.error">
         <ul class="nav nav-stacked nav-pills">
             <li role="presentation">
-                <a href="#" ng-click="selectCategory()">home</a>
+                <a href="#" ng-click="selectCategory()" ng-class="getCategoryClass(item)">Home</a>
             </li>
             <li ng-repeat="item in data.products | orderBy:'category'| unique:'category'">
                 <a href="#" ng-click="selectCategory(item)"  ng-class="getCategoryClass(item)" >      {{item}}
@@ -10,21 +15,23 @@
             </li>
         </ul>
     </div>
-    <div class="col-xs-8">
-        <div class="well" ng-repeat="item in data.products | filter:categoryFilterFn | range:selectedPage:pageSize">
-            <h3>
-                <strong>{{item.name}}</strong>
-                <span class="pull-right label label-primary">
-                    {{item.price | currency}}
-                </span>
-            </h3>
-            <button ng-click="addProductToCart(item)" class="btn btn-success pull-right">
-                Add to cart
-            </button>
-            <span class="lead">{{item.description}}</span>
-        </div>
-        <div class="pull-right">
-            <a ng-repeat="page in data.products | filter:categoryFilterFn | pageCount:pageSize"  ng-click="selectPage($index +1)" class="btn btn-default" ng-class="getPageClass($index+1)">{{$index +1}}</a>
+    <div class=" well col-xs-10 col-md-10">
+        <div class="col-sm-6 col-md-4" ng-repeat="item in data.products | filter:categoryFilterFn | range:selectedPage:pageSize">
+            <div class="thumbnail">
+             <!--  <img src="..." alt="..."> -->
+              <div class="caption">
+                <h3>{{item.name}}</h3>
+                <p><span class="">{{item.description}}</span></p>
+                <p class="label label-primary">{{item.price | currency}}</p>
+                <br/><br/>
+                <p>
+                    <a href="#" class="btn btn-success btn-sm" ng-click="addProductToCart(item)">Add to Cart</a> 
+                </p>
+              </div>
+            </div>
         </div>
     </div>
+     <div class="clearfix pull-right">
+            <a ng-repeat="page in data.products | filter:categoryFilterFn | pageCount:pageSize"  ng-click="selectPage($index +1)" class="btn btn-default" ng-class="getPageClass($index+1)">{{$index +1}}</a>
+        </div>
 </div>

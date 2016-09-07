@@ -1,6 +1,6 @@
 angular.module("sportsStore")
 	.constant("productListActiveClass", 'btn-primary')
-    .constant("productListPageCount", 4)
+    .constant("productListPageCount", 6)
     .controller("productListCtrl", function ($scope, $filter, productListActiveClass, 
         productListPageCount , cart) {
  
